@@ -1,0 +1,21 @@
+-
+  const pageFooterContent = {
+    navigation: [
+      {label: 'Каталог', href: '#'},
+      {label: 'Производители', href: '#manufacturers'},
+      {label: 'Для кого мы работаем', href: '#'},
+      {label: 'Сертификаты', href: '#'},
+      {label: 'О нас', href: '#'},
+      {label: 'Контакты', href: '#'},
+    ],
+    actionButton: 'Оставить заявку',
+  };
+
+footer.page-footer.page-grid
+  .page-footer__inner 
+    +logo()(class = 'page-footer__logo')
+    ul.page-footer__navigation-list 
+      each link in pageFooterContent.navigation
+        li.page-footer__navigation-item 
+          a.link(href=link.href)= link.label
+    +main-button(pageFooterContent.actionButton)(class='page-footer__button')

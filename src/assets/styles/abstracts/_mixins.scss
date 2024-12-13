@@ -1,0 +1,139 @@
+@use 'sass:string';
+@use 'sass:list';
+@use 'sass:map';
+@use "./variables";
+
+@mixin page-grid($content-column-count: null, $gap-size: null) {
+  $columns: ();
+  $gap-size: if($gap-size, $gap-size, string.unquote('0px'));
+
+  @if $content-column-count {
+    $columns: list.append($columns, [full-width-start full-left-start] var(--responsive-inline-width) [breakout-start] var(--responsive-breakout-width));
+    $column-width: calc((var(--responsive-content-width) - $gap-size * ($content-column-count - 1)) / $content-column-count);
+  
+    @if $content-column-count <= 0 or $content-column-count == 1 {
+      $columns: list.append($columns, [full-left-end content-start] var(--responsive-content-width) [content-end full-right-start]);
+    }
+
+    $index: 1;
+  
+    @if $content-column-count > 1 {
+      @while $index <= $content-column-count {
+        @if $index > 1 and $index < $content-column-count {
+          $columns: list.append($columns, [column-#{$index}-start] $column-width [column-#{$index}-end] $gap-size);
+          $index: $index + 1;
+        }
+  
+        @if $index == 1 {
+          $columns: list.append($columns, [full-left-end content-start column-#{$index}-start] $column-width [column-#{$index}-end] $gap-size);
+          $index: $index + 1;
+        }
+  
+        @if $index == $content-column-count {
+          $columns: list.append($columns, [column-#{$index}-start] $column-width [column-#{$index}-end content-end full-right-start]);
+          $index: $index + 1;
+        }
+      }
+    }
+
+    $columns: list.append($columns, var(--responsive-breakout-width) [breakout-end] var(--responsive-inline-width) [full-right-end full-width-end]);
+  } @else {
+    $columns: list.append($columns,
+      [full-width-start full-left-start] var(--responsive-inline-width) 
+      [breakout-start] var(--responsive-breakout-width) 
+      [full-left-end content-start] var(--responsive-content-width) 
+      [content-end full-right-start] var(--responsive-breakout-width) 
+      [breakout-end] var(--responsive-inline-width) [full-right-end full-width-end]
+    );
+  }
+
+  display: grid;
+  grid-template-columns: $columns;
+}
+
+@mixin page-grid-full-width() {
+  grid-column: full-width;
+  display: grid;
+  grid-template-columns: subgrid;
+
+  & > * {
+    grid-column: content;
+  }
+}
+
+@mixin page-grid-breakout() {
+  grid-column: breakout;
+}
+
+@mixin content-grid($content-column-count, $gap-size, $fake-gaps: false) {
+  $columns: ();
+
+  @if $fake-gaps {
+    @if $content-column-count <= 0 or $content-column-count == 1 {
+      $columns: list.append($grid-columns-list, ());
+    }
+
+    $index: 1;
+
+    @if $content-column-count > 1 {
+      @while $index <= $content-column-count {
+        @if $index > 1 and $index < $content-column-count {
+          $columns: list.append($columns, [column-#{$index}-start] 1fr [column-#{$index}-end] $gap-size);
+          $index: $index + 1;
+        }
+  
+        @if $index == 1 {
+          $columns: list.append($columns, [column-#{$index}-start] 1fr [column-#{$index}-end] $gap-size);
+          $index: $index + 1;
+        }
+  
+        @if $index == $content-column-count {
+          $columns: list.append($columns, [column-#{$index}-start] 1fr [column-#{$index}-end]);
+          $index: $index + 1;
+        }
+      }
+    }
+  } @else {
+    @if $content-column-count <= 0 or $content-column-count == 1 {
+      $columns: list.append($grid-columns-list, ());
+    }
+
+    $index: 1;
+
+    @if $content-column-count > 1 {
+      @while $index <= $content-column-count {
+        @if $index > 1 and $index < $content-column-count {
+          $columns: list.append($columns, [column-#{$index - 1}-end column-#{$index}-start] 1fr);
+          $index: $index + 1;
+        }
+  
+        @if $index == 1 {
+          $columns: list.append($columns, [column-#{$index}-start] 1fr);
+          $index: $index + 1;
+        }
+  
+        @if $index == $content-column-count {
+          $columns: list.append($columns, [column-#{$index - 1}-end column-#{$index}-start] 1fr [column-#{$index}-end]);
+          $index: $index + 1;
+        }
+      }
+    }
+
+    gap: $gap-size;
+  }
+
+  display: grid;
+  grid-template-columns: $columns;
+}
+
+@mixin mq-from($key) {
+  @if map.has-key(variables.$breakpoints, $key) {
+    $size: map.get(variables.$breakpoints, $key);
+
+    @media (width >= $size) {
+      @content;
+    }
+  } @else {
+    @warn "key [#{$key}] is not defined in $breakpoints"
+  }
+};

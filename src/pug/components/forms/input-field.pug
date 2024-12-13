@@ -1,0 +1,17 @@
+mixin input-field(label)
+  -
+    const {type = 'text'} = attributes;
+    const {icon, ...restAtt} = attributes;
+    const classNames = restAtt.class;
+    restAtt?.class && delete restAtt.class;
+
+  case type
+    when 'textarea'
+      label.input-field(class=classNames)= label
+        textarea.input-field__input&attributes(restAtt) 
+    default 
+      label.input-field(class=classNames)
+        if icon 
+          +common-sprite(icon)(class='input-field__icon')
+        span.input-field__label= label
+        input.input-field__input&attributes(restAtt)

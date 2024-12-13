@@ -1,0 +1,49 @@
+@use '../abstracts';
+
+.page-footer {
+  color: var(--base-color-neutral-100);
+  background-color: color-mix(in srgb, var(--base-color-neutral-0) 80%, white);
+  padding-block: abstracts.fluid-size(28px, 60px, medium, large);
+
+  &__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px abstracts.fluid-size(24px, 48px, medium, large);
+    flex-direction: column;
+  }
+
+  &__logo {
+    height: 35px;
+    width: 189px;
+    flex-shrink: 0;
+  }
+
+  &__button {
+    padding-inline: 52px;
+  }
+
+  &__navigation-list {
+    display: none;
+    align-items: center;
+
+    flex-wrap: wrap;
+    flex-grow: 1;
+    gap: 12px 36px;
+    gap: 12px abstracts.fluid-size(12px, 36px, medium, large);
+
+    @include abstracts.mq-from(medium) {
+      display: flex;
+    }
+  }
+
+  @include abstracts.mq-from(medium) {
+    &__inner {
+      flex-direction: row;
+    }
+
+    &__navigation-list {
+      display: flex;
+    }
+  }
+}

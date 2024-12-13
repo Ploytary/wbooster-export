@@ -1,0 +1,26 @@
+@use '../abstracts';
+
+.steps-section {
+  padding-top: 135px;
+  padding-bottom: 154px;
+  justify-items: center;
+  background-image: url('@image/prepared/common/steps-bg.png');
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  @include abstracts.page-grid-full-width;
+
+  &__description {
+    text-align: center;
+    margin-bottom: 46px;
+  }
+
+  &__steps-list {
+    margin-bottom: 48px;
+  }
+
+  &__action-button {
+    padding-inline: 72px;
+  }
+}

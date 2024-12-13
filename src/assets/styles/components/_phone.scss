@@ -1,0 +1,25 @@
+@use '../abstracts';
+
+.phone {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  transition-duration: var(--transition-hover);
+  transition-property: color;
+
+  &__icon {
+    width: 28px;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    color: color-mix(in srgb, var(--brand-color-secondary-1) , white 26%);
+  }
+
+  @include abstracts.mq-from(medium) {
+    &__icon {
+      width: 33px;
+    }
+  }
+}

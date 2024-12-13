@@ -1,0 +1,23 @@
+-
+  const heroSectionSubscribeContent = {
+    title: 'Оптовые поставки<br><strong>электронных компонентов</strong><br>из китая день в день',
+    description: 'Комплексные поставки электронных компонентов и оборудования. Подберем аналоги популярных брендов из Европы в условиях санкций.',
+    list: [
+      'Отсрочка платежей для постоянных клиентов',
+      'Бесплатная доставка по Москве и СПБ в течение 2х часов',
+      'Квалифицированный персональный менеджер',
+    ],
+  };
+
+section.section.hero-section-subscribe
+  .hero-section-subscribe__columns
+    .hero-section-subscribe__column
+      h2.section__title.hero-section-subscribe__title!= heroSectionSubscribeContent.title
+      p.hero-section-subscribe__description= heroSectionSubscribeContent.description
+      ul.hero-section-subscribe__features-list
+        each item in heroSectionSubscribeContent.list
+          li.hero-section-subscribe__features-item 
+            span(class='hero-section-subscribe__features-icon')
+            span= item
+    .hero-section-subscribe__column
+      include ./forms/form-callback.pug

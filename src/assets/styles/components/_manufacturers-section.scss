@@ -1,0 +1,59 @@
+@use '../abstracts';
+
+.manufacturers-section {
+  padding-top: 153px;
+  padding-bottom: 162px;
+  background-color: var(--brand-color-primary-2);
+  color: var(--base-color-neutral-100);
+  background-image: url('@image/prepared/common/manufacturers-bg.webp');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+
+  @include abstracts.page-grid-full-width;
+
+  &__slider {
+    @include abstracts.page-grid-breakout;
+    display: grid;
+    grid-template-columns: subgrid;
+    position: relative;
+    width: 100%;
+    margin-bottom: 40px;
+
+    & > * {
+      grid-column: content;
+    }
+
+    .brand-slider {
+      width: 100%;
+
+      &__controls {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        grid-column: breakout;
+        z-index: 1;
+      }
+    }
+  }
+
+  &__title {
+    margin-bottom: 58px;
+  }
+
+  &__card {
+    width: 240px;
+    height: 174px;
+    border-radius: 10px;
+    background-color: var(--base-color-neutral-100);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  &__card-image {
+    object-fit: none;
+  }
+}

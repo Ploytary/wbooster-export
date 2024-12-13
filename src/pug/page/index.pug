@@ -1,0 +1,16 @@
+extends ../layout/page-layout
+
+block variables
+  -
+    const pageScripts = ['pages/home/index.ts'];
+    const pageTitle = 'Главная страница';
+    const currentPageSlug = 'home';
+
+block content
+  main(class= 'page-content page-grid')
+    h1.visually-hidden= pageTitle
+    include ../components/hero-section-subscribe.pug
+    include ../components/advantages-section.pug
+    include ../components/manufacturers-section.pug
+    include ../components/steps-section.pug
+    include ../components/faq-section.pug

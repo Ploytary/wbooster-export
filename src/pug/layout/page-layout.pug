@@ -1,0 +1,35 @@
+include ../components/_mixin-inclusion.pug
+
+block variables
+-
+  const config = {
+    brand: {
+      name: 'Semitex',
+    },
+    localization: 'ru',
+  };
+  const pageTitlePrefix = config.brand.name;
+  const lang = config.localization;
+  const scripts = pageScripts ?? [];
+  const pageDescription = 'Электронные компоненты из Китая';
+
+doctype html
+html(lang= lang)
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    meta(name = "description", content = pageDescription)
+    link(href=require('/src/assets/styles/main.scss') rel="stylesheet")
+    link(rel="shortcut icon", href=require('/src/assets/images/favicon.svg'), type="image/x-icon")
+    title= `${pageTitlePrefix} — ${pageTitle}`
+    script(src='@script/helpers/pug-plugin-dev-server.ts')
+    script(src='@script/pages/all/index.ts', defer)
+    each item in scripts
+      script(src=`@script/${item}`, defer)
+  body
+    block header
+      include ../components/page-header.pug
+    block content
+    block footer
+      include ../components/page-footer.pug

@@ -1,0 +1,76 @@
+@use '../abstracts';
+
+.advantages-section {
+  @include abstracts.page-grid-full-width;
+
+  &__description {
+    max-width: 85%;
+    margin-bottom: 45px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  &__list  {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 369px);
+    justify-content: center;
+    gap: 32px 42px;
+  }
+
+  &__item  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 66px 25px 40px;
+    min-height: 406px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: var(--base-color-neutral-100);
+    filter: var(--brand-shadow-2);
+    overflow: hidden;
+
+    &::after {
+      position: absolute;
+      z-index: -1;
+      bottom: 0;
+      right: 0;
+      content: '';
+      width: 441.52px;
+      aspect-ratio: 1;
+      background-color: color-mix(in srgb, var(--brand-color-secondary-1) 7%, transparent);
+      border-radius: 30px;
+      transform-origin: bottom right;
+      transform: rotate(45deg) translate(67%, 77%);
+    }
+  }
+
+  &__item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 112.28px;
+    height: 112.28px;
+    padding: 30px;
+    border-radius: 50%;
+    color: var(--base-color-neutral-100);
+    background-image: linear-gradient(color-mix(in srgb, var(--brand-color-primary-1), black 20%), color-mix(in srgb, var(--brand-color-primary-1), var(--brand-color-secondary-1) 45%));
+    box-shadow: 
+      11px -26px 0 color-mix(in srgb, var(--brand-color-primary-1) 10%, transparent),
+      21px 25px 0 color-mix(in srgb, var(--brand-color-primary-1) 10%, transparent),
+      -24px 16px 0 color-mix(in srgb, var(--brand-color-primary-1) 10%, transparent);
+  }
+
+  &__item-term {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 62px;
+    align-items: center;
+    margin-bottom: 12px;
+    color: color-mix(in srgb, var(--brand-color-primary-1), gray 32%);
+  }
+
+  &__item-description {
+    padding-inline: 17px;
+    color: color-mix(in srgb, var(--base-color-neutral-0) 33%, white);
+  }
+}

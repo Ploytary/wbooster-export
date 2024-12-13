@@ -1,0 +1,251 @@
+$horizontal-arrow-length: 28px;
+$vertical-out-arrow-length: 30px;
+$vertical-in-arrow-length: 23px;
+$border-radius: 20px;
+$background-image: url('@image/raw/common/svg/arrow-item-bg.svg'), var(--brand-gradient-4);
+$background-position: calc(0% + 120px) calc(0% + 110px), center;
+$image-arrow-to-right-in: url('@image/raw/common/svg/arrow-ltr-in.svg');
+$image-arrow-to-right-out: url('@image/raw/common/svg/arrow-ltr-out.svg');
+$image-arrow-to-left-in: url('@image/raw/common/svg/arrow-rtl-in.svg');
+$image-arrow-to-left-out: url('@image/raw/common/svg/arrow-rtl-out.svg');
+$image-arrow-to-bottom-out: url('@image/raw/common/svg/arrow-ttb-out.svg');
+$image-arrow-to-bottom-in: url('@image/raw/common/svg/arrow-ttb-in.svg');
+
+.arrow-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 30px 20px;
+  width: 100%;
+  counter-reset: number;
+  isolation: isolate;
+
+  &__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 22px 21px;
+    grid-auto-rows: min-content;
+    flex-basis: 30%;
+    padding: 36px 30px 39px 35px;
+    border-radius: 10px;
+    color: var(--base-color-neutral-100);
+    counter-increment: number;
+
+    &::after, &::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      content: '';
+      border-radius: $border-radius;
+      mask-repeat: no-repeat;
+    }
+
+    &::before {
+      background-image: $background-image;
+      background-position: $background-position;
+      mask-image: linear-gradient(white,white);
+      mask-composite: subtract;
+    }
+
+    &::after {
+      mask-mode: luminance;
+      mask-composite: add;
+      mask-repeat: no-repeat;
+    }
+
+    &--to-right-in {
+      &::before {
+        mask-image: linear-gradient(white,white), $image-arrow-to-right-in;
+        mask-position: left center, left center;
+        mask-size: calc(100%), $horizontal-arrow-length;
+      }
+    }
+
+    &--to-right-out {
+      &::before {
+        mask-size: calc(100% - $border-radius - $horizontal-arrow-length + 2px), $horizontal-arrow-length;
+        right: -1 * $horizontal-arrow-length;
+      }
+
+      &::after {
+        right: -1 * $horizontal-arrow-length;
+        background-image: $background-image;
+        background-position: $background-position;
+        mask-image:
+          $image-arrow-to-right-out,
+          radial-gradient(circle $border-radius * 2 at bottom $border-radius right $horizontal-arrow-length + $border-radius, white 50%, transparent 50%),
+          radial-gradient(circle $border-radius * 2 at top $border-radius right $horizontal-arrow-length + $border-radius, white 50%, transparent 50%),
+          linear-gradient(white, white),
+          linear-gradient(white, white);
+        mask-size: $horizontal-arrow-length + 1px, auto, auto, $border-radius calc(100% - $border-radius * 2), $border-radius calc(100%);
+        mask-position: right, center, center, calc(100% - $horizontal-arrow-length) center, calc(100% - $horizontal-arrow-length - $border-radius) center, center, center, center;
+      }
+    }
+
+    &--to-left-in {
+      &::before {
+        mask-image: linear-gradient(white,white), $image-arrow-to-left-in;
+        mask-position: right center, right center;
+        mask-size: calc(100%), $horizontal-arrow-length;
+      }
+    }
+
+    &--to-left-out {
+      &::after {
+        left: -1 * $horizontal-arrow-length;
+        background-image: $background-image;
+        background-position: $background-position;
+        mask-image:
+          $image-arrow-to-left-out,
+          radial-gradient(circle $border-radius * 2 at bottom $border-radius left $horizontal-arrow-length + $border-radius, white 50%, transparent 50%),
+          radial-gradient(circle $border-radius * 2 at top $border-radius left $horizontal-arrow-length + $border-radius, white 50%, transparent 50%),
+          linear-gradient(white, white),
+          linear-gradient(white, white);
+        mask-size: $horizontal-arrow-length + 1px, auto, auto, $border-radius calc(100% - $border-radius * 2), $border-radius calc(100%);
+        mask-position: left, center, center, calc($horizontal-arrow-length) center, calc($horizontal-arrow-length + $border-radius) center, center, center, center;
+      }
+    }
+
+    &--to-bottom-in {
+      &::before {
+        mask-image: linear-gradient(white,white), $image-arrow-to-bottom-in;
+        mask-composite: subtract;
+        mask-position: left center, center top;
+      }
+    }
+
+    &--to-bottom-out {
+      &::before {
+        bottom: -1 * $vertical-out-arrow-length;
+        mask-size: 100% calc(100% - $border-radius - $vertical-out-arrow-length + 2px), auto $vertical-in-arrow-length;
+        mask-position: top, top center;
+      }
+
+      &::after {
+        bottom: -1 * $vertical-out-arrow-length;
+        background-image: $background-image;
+        background-position: $background-position;
+        mask-image:
+          $image-arrow-to-bottom-out,
+          radial-gradient(circle $border-radius * 2 at left $border-radius bottom $vertical-out-arrow-length + $border-radius, white 50%, transparent 50%),
+          radial-gradient(circle $border-radius * 2 at right $border-radius bottom $vertical-out-arrow-length + $border-radius, white 50%, transparent 50%),
+          linear-gradient(white, white),
+          linear-gradient(white, white);
+        mask-size: auto $vertical-out-arrow-length + 1px, auto, auto, calc(100% - $border-radius * 2) $border-radius, calc(100%) $border-radius;
+        mask-position: bottom, center, center, center calc(100% - $vertical-out-arrow-length), center calc(100% - $vertical-out-arrow-length - $border-radius), center, center, center;
+      }
+    }
+
+
+    &--to-bottom-out-to-right-in {
+      &::before {
+        mask-image: linear-gradient(white,white), $image-arrow-to-right-in;
+        bottom: -1 * $vertical-out-arrow-length;
+        mask-size: 100% calc(100% - $border-radius - $horizontal-arrow-length), $horizontal-arrow-length;
+        mask-position: top, left calc(50% - $horizontal-arrow-length / 2);
+      }
+
+      &::after {
+        bottom: -1 * $vertical-out-arrow-length;
+        background-image: $background-image;
+        background-position: $background-position;
+        mask-image:
+          $image-arrow-to-bottom-out,
+          radial-gradient(circle $border-radius * 2 at left $border-radius bottom $vertical-out-arrow-length + $border-radius, white 50%, transparent 50%),
+          radial-gradient(circle $border-radius * 2 at right $border-radius bottom $vertical-out-arrow-length + $border-radius, white 50%, transparent 50%),
+          linear-gradient(white, white),
+          linear-gradient(white, white);
+        mask-size: auto $vertical-out-arrow-length + 1px, auto, auto, calc(100% - $border-radius * 2) $border-radius, calc(100%) $border-radius;
+        mask-position: bottom, center, center, center calc(100% - $vertical-out-arrow-length), center calc(100% - $vertical-out-arrow-length - $border-radius), center, center, center;
+      }
+    }
+
+    &--to-bottom-in-to-left-out {
+      &::before {
+        mask-image: linear-gradient(white,white), $image-arrow-to-bottom-in;
+        mask-size: calc(100% - $border-radius - $vertical-in-arrow-length + 2px), auto $vertical-in-arrow-length;
+        mask-position: right center, calc(50% + $vertical-in-arrow-length / 2) top;
+        left: -1 * $vertical-in-arrow-length;
+      }
+
+
+      &::after {
+        left: -1 * $horizontal-arrow-length;
+        background-image: $background-image;
+        background-position: $background-position;
+        mask-image:
+          $image-arrow-to-left-out,
+          radial-gradient(circle $border-radius * 2 at bottom $border-radius left $horizontal-arrow-length + $border-radius, white 50%, transparent 50%),
+          radial-gradient(circle $border-radius * 2 at top $border-radius left $horizontal-arrow-length + $border-radius, white 50%, transparent 50%),
+          linear-gradient(white, white),
+          linear-gradient(white, white);
+        mask-size: $horizontal-arrow-length + 1px, auto, auto, $border-radius calc(100% - $border-radius * 2), $border-radius calc(100%);
+        mask-position: left, center, center, calc($horizontal-arrow-length) center, calc($horizontal-arrow-length + $border-radius) center, center, center, center;
+      }
+    }
+
+    &--to-bottom-in-to-right-out {
+      &::before {
+        mask-image: linear-gradient(white,white), $image-arrow-to-bottom-in;
+        mask-size: calc(100% - $border-radius - $vertical-in-arrow-length + 2px), auto $vertical-in-arrow-length;
+        mask-position: left center, calc(50% - $vertical-in-arrow-length / 2) top;
+        right: -1 * $vertical-in-arrow-length;
+      }
+
+      &::after {
+        right: -1 * $horizontal-arrow-length;
+        background-image: $background-image;
+        background-position: $background-position;
+        mask-image:
+          url('@image/raw/common/svg/arrow-ltr-out.svg'),
+          radial-gradient(circle $border-radius * 2 at bottom $border-radius right $horizontal-arrow-length + $border-radius, white 50%, transparent 50%),
+          radial-gradient(circle $border-radius * 2 at top $border-radius right $horizontal-arrow-length + $border-radius, white 50%, transparent 50%),
+          linear-gradient(white, white),
+          linear-gradient(white, white);
+        mask-size: $horizontal-arrow-length + 1px, auto, auto, $border-radius calc(100% - $border-radius * 2), $border-radius calc(100%);
+        mask-position: right, center, center, calc(100% - $horizontal-arrow-length) center, calc(100% - $horizontal-arrow-length - $border-radius) center, center, center, center;
+      }
+    }
+
+    &--to-bottom-out-to-left-in {
+      &::before {
+        mask-image: linear-gradient(white,white), $image-arrow-to-left-in;
+        bottom: -1 * $vertical-out-arrow-length;
+        mask-size: 100% calc(100% - $border-radius - $horizontal-arrow-length), $horizontal-arrow-length;
+        mask-position: top, right calc(50% - $horizontal-arrow-length / 2);
+      }
+
+      &::after {
+        bottom: -1 * $vertical-out-arrow-length;
+        background-image: $background-image;
+        background-position: $background-position;
+        mask-image:
+          $image-arrow-to-bottom-out,
+          radial-gradient(circle $border-radius * 2 at left $border-radius bottom $vertical-out-arrow-length + $border-radius, white 50%, transparent 50%),
+          radial-gradient(circle $border-radius * 2 at right $border-radius bottom $vertical-out-arrow-length + $border-radius, white 50%, transparent 50%),
+          linear-gradient(white, white),
+          linear-gradient(white, white);
+        mask-size: auto $vertical-out-arrow-length + 1px, auto, auto, calc(100% - $border-radius * 2) $border-radius, calc(100%) $border-radius;
+        mask-position: bottom, center, center, center calc(100% - $vertical-out-arrow-length), center calc(100% - $vertical-out-arrow-length - $border-radius), center, center, center;
+      }
+    }
+  }
+
+  &__item-title {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: center;
+    text-transform: uppercase;
+
+    &::before {
+      display: block;
+      content: counter(number, decimal-leading-zero);
+      color: color-mix(in srgb, var(--brand-color-secondary-1), white 94%);
+    }
+  }
+
+  &__item-desc {
+    grid-column: 2;
+  }
+}

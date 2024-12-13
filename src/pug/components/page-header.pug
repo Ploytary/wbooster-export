@@ -1,0 +1,30 @@
+-
+  const pageHeaderContent = {
+    navigation: [
+      {label: 'Каталог', href: '#'},
+      {label: 'Производители', href: '#manufacturers'},
+      {label: 'Для кого мы работаем', href: '#'},
+      {label: 'Сертификаты', href: '#'},
+      {label: 'О нас', href: '#'},
+      {label: 'FAQ', href: '#faq'},
+      {label: 'Контакты', href: '#'},
+    ],
+  };
+
+header.page-header.page-grid
+  nav.page-header__navigation 
+    +logo()(class = 'page-header__logo')
+    ul.page-header__navigation-list 
+      each link in pageHeaderContent.navigation
+        li.page-header__navigation-item 
+          a.link(href=link.href)= link.label
+    +phone()(class='page-header__phone')
+    button.page-header__burger-menu-button
+      +common-sprite('burger-menu')
+.burger-menu
+  button.burger-menu__close-button
+    +common-sprite('cross')
+  ul.burger-menu__menu
+    each link in pageHeaderContent.navigation
+      li.burger-menu__menu-item
+        a.link(href=link.href)= link.label

@@ -1,0 +1,53 @@
+@use '../abstracts';
+@use 'sass:map';
+
+:root {
+  // color: 
+  --brand-color-primary-1: hsl(239deg 88% 23%);
+  --brand-color-primary-2: hsl(240deg 90% 35%);
+  --brand-color-secondary-1: hsl(238deg 79% 70%);
+  --brand-color-accent-1: hsl(39deg 100% 50%);
+  --brand-color-accent-2: hsl(266deg 57% 45%);
+  --base-color-neutral-0: hsl(0deg 0% 0%);
+  --base-color-neutral-100: hsl(0deg 0% 100%);
+  --brand-shadow-1: drop-shadow(0 4px 20px color-mix(in srgb, var(--base-color-neutral-0) 10%, transparent));
+  --brand-shadow-2: drop-shadow(0 4px 30px color-mix(in srgb, var(--brand-color-primary-2) 5%, transparent));
+  --brand-gradient-2: linear-gradient(hsl(180deg 100% 64%), hsl(203deg 88% 55%));
+  --brand-gradient-4: linear-gradient(143deg, var(--brand-color-primary-1) 9%, var(--brand-color-primary-2));
+  --brand-gradient-5: linear-gradient(hsl(0deg 0% 100%), color-mix(in srgb, var(--brand-color-secondary-1), hsl(0deg 0% 100%) 50%));
+  --brand-gradient-6: linear-gradient(color-mix(in srgb, var(--brand-color-secondary-1), hsl(0deg 0% 100%) 50%), var(--brand-color-secondary-1));
+
+  // font-sizes
+  --font-size-xs: #{abstracts.to-rem(14px)};
+  --font-size-s: #{abstracts.fluid-font-size(16px, 18px, small, large)};
+  --font-size-m: #{abstracts.fluid-font-size(18px, 20px, small, large)};
+  --font-size-l: #{abstracts.fluid-font-size(19px, 22px, small, large)};
+  --font-size-xl: #{abstracts.fluid-font-size(20px, 23px, small, large)};
+  --font-size-xxl: #{abstracts.fluid-font-size(22px, 24px, small, large)};
+  --font-size-display-s: #{abstracts.fluid-font-size(28px, 36px, small, large)};
+  --font-size-display-m: #{abstracts.fluid-font-size(30px, 45px, small, large)};
+  --font-size-display-l: #{abstracts.fluid-font-size(40px, 56.23px, small, large)};
+  --font-size-display-xl: #{abstracts.fluid-font-size(45px, 69.23px, small, large)};
+
+  // gaps
+
+
+  // transitions
+  --transition-hover: 0.3s;
+  --transition-header: 1s;
+  --transition-burger-menu: 0.3s;
+  --transition-common: 0.3s;
+
+  // layout
+  --layout-padding-inline: 15px;
+  --layout-content-min-width: 380px;
+  --layout-content-max-width: 1280px;
+  --layout-breakout-max-width: 250px;
+  --breakout-max-width: calc(var(--layout-content-max-width) + var(--layout-breakout-max-width));
+  --responsive-inline-width: minmax(var(--layout-padding-inline), 1fr);
+  --responsive-content-width: max(var(--layout-content-min-width), min(var(--layout-content-max-width), calc(100% - var(--layout-padding-inline) * 2)));
+  --responsive-breakout-width: minmax(0, calc((var(--breakout-max-width) - var(--layout-content-max-width)) / 2));
+  --layout-breakpoint-small: #{map.get(abstracts.$breakpoints, 'small')};
+  --layout-breakpoint-medium: #{map.get(abstracts.$breakpoints, 'medium')};
+  --layout-breakpoint-large: #{map.get(abstracts.$breakpoints, 'large')};
+  }

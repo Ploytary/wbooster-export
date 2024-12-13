@@ -1,0 +1,25 @@
+-
+  const formContent = {
+    description: 'Закажите обратный звонок',
+    note: 'Мы гарантируем конфиденциальность данных',
+    fields: [
+      {label: 'Ваше имя*', name: 'user-name', placeholder: 'Петров Петр'},
+      {label: 'Ваш номер*', name: 'user-phone', placeholder: '+7(_ _ _) _ _ _-_ _-_ _'},
+    ],
+    request: {
+      method: 'post',
+      action: '#',
+    },
+    submitButton: 'Заказать звонок',
+  };
+
+form.form.form-callback(action= formContent.request.action, method= formContent.request.method)
+  p.form__headline= formContent.description
+  .form__content 
+    each input in formContent.fields
+      p.form__row
+        +input-field(input.label)(name=input.name, placeholder=input.placeholder)
+    +main-button(formContent.submitButton)(accent, type='submit', class='form__submit-button')
+    p.form__note 
+      +common-sprite('lock')
+      span= formContent.note

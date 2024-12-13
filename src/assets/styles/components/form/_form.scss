@@ -1,0 +1,43 @@
+.form {
+  border-radius: 10px;
+  overflow: hidden;
+
+  &__headline {
+    padding: 28px 48px;
+    background-image: linear-gradient(var(--brand-color-accent-2), color-mix(in srgb, var(--brand-color-accent-2), black 20%));
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__content  {
+    display: flex;
+    flex-direction: column;
+    padding: 27px 40px 37px;
+    background-color: var(--base-color-neutral-100);
+  }
+
+  &__row {
+    margin-bottom: 5px;
+
+    &:nth-of-type(2) {
+      margin-bottom: 35px;
+    }
+  }
+
+  &__note  {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: color-mix(in srgb, var(--base-color-neutral-0), white 75%);
+
+    .svg-icon {
+      width: 16px;
+      aspect-ratio: 1;
+      color: color-mix(in srgb, var(--brand-color-secondary-1) , white 26%);
+    }
+  }
+
+  &__submit-button {
+    margin-bottom: 14px;
+  }
+}

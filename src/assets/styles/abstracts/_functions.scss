@@ -1,0 +1,107 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
+@use './variables';
+
+@function remove-units($number) {
+  @return math.div($number, ($number * 0 + 1));
+}
+
+@function to-px($value) { 
+  @if math.is-unitless($value) {
+    @error 'unitless parameter';
+  }
+
+  $units-in-px: (
+    'cm': math.div(96px, 2.54),
+    'mm': math.div(math.div(96px, 2.54), 10),
+    'in': 96px,
+    'px': 1px,
+    'pt': math.div(96px, 72),
+    'pc': 12 * math.div(96px, 72),
+    'rem': 16px
+  );
+  $unit: math.unit($value);
+
+  @if map.has-key($units-in-px, $unit) {
+    @return map.get($units-in-px, $unit) * remove-units($value);
+  } @else {
+    @error 'invalid param value';
+  }
+}
+
+
+@function to-rem($number) {
+  $number: to-px($number);
+  $default-rem-size: 16; // px
+
+  @if math.is-unitless($number) {
+    @error 'unitless parameter';
+  } @else if math.unit($number) == "px" {
+    @return math.div(remove-units($number), $default-rem-size) * 1rem;
+  } @else if math.unit($number) == "rem" {
+    @return $number;
+  } @else {
+    @error 'parameter must be in rem or px unit';
+  }
+};
+
+@function round($number, $decimals: 0) {
+  $n: 1;
+
+  @if $decimals > 0 {
+      @for $i from 1 through $decimals {
+          $n: $n * 10;
+      }
+  }
+
+  @return math.div(math.round($number * $n), $n);
+}
+
+@function fluid-size($min-size, $max-size, $min-breakpoint, $max-breakpoint, $options: null) {
+  $breakpoints-map: variables.$breakpoints;
+  $fluid-size-default-options: (
+    'slope-unit': 'vw',
+    'to-rem': false,
+    'reverse': false,
+  );
+  $options: if($options, map.merge($fluid-size-default-options, $options), $fluid-size-default-options);
+  $min-breakpoint: if(meta.type-of($min-breakpoint) == string, map.get($breakpoints-map, $min-breakpoint), $min-breakpoint);
+  $max-breakpoint: if(meta.type-of($max-breakpoint) == string, map.get($breakpoints-map, $max-breakpoint), $max-breakpoint);
+
+  @if math.unit($min-breakpoint) != 'px' or math.unit($max-breakpoint) != 'px' {
+    @error 'breakpoints must be in px units';
+  }
+
+  @if math.is-unitless($min-size) or math.is-unitless($max-size) {
+    @error 'sizes must have units';
+  }
+
+  $min-size: to-px($min-size);
+  $max-size: to-px($max-size);
+
+  @if map.get($options, 'to-rem') {
+    $min-size: to-rem($min-size);
+    $max-size: to-rem($max-size);
+    $min-breakpoint: to-rem($min-breakpoint);
+    $max-breakpoint: to-rem($max-breakpoint);
+  }
+
+  $slope: math.div($max-size - $min-size, $max-breakpoint - $min-breakpoint);
+  $slope-to-unit: round($slope * 100, 3);
+  $slope-unit: map.get($options, 'slope-unit'); 
+
+  @if map.get($options, 'reverse') {
+    $intercept: round($max-size + $slope * $min-breakpoint, 3);
+
+    @return clamp(#{$min-size}, -#{$slope-to-unit}#{$slope-unit} + #{$intercept}, #{$max-size});
+  } @else {
+    $intercept: round($min-size - $slope * $min-breakpoint, 3);
+
+    @return clamp(#{$min-size}, #{$slope-to-unit}#{$slope-unit} + #{$intercept}, #{$max-size});
+  }
+}
+
+@function fluid-font-size($min-size, $max-size, $min-breakpoint, $max-breakpoint) {
+  @return fluid-size($min-size, $max-size, $min-breakpoint, $max-breakpoint, ('to-rem': true)); 
+}

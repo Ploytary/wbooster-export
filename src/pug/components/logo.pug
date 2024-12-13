@@ -1,0 +1,4 @@
+mixin logo()
+  p.logo&attributes(attributes)
+    +content-sprite('logo')
+    span.logo__label.visually-hidden= config.brand.name

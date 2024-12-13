@@ -1,0 +1,18 @@
+mixin accordion-element(data)
+  - const details = Array.isArray(data.details) ? data.details : [data.details];
+
+  .accordion__slot
+    dt.accordion__summary
+      button.accordion__trigger(type='button', aria-label='Развернуть/Свернуть')
+        span.accordion__summary-text= data.summary
+        span.accordion__icon
+          +common-sprite('arrow')
+    dd.accordion__details
+      .accordion__details-inner
+        each paragraph in details
+          p.accordion__details-text= paragraph
+
+mixin accordion(list)
+  dl.accordion&attributes(attributes)
+    each item in list
+      +accordion-element(item)

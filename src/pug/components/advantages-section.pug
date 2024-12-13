@@ -1,0 +1,24 @@
+-
+  const advantagesSectionContent = {
+    title: 'Почему с нами выгодно',
+    description: 'С 1996 года мы занимаемся оптовыми поставками электронных компонентов от ведущих производителей из Европы и Азии для Российских потребителей.',
+    list: [
+      {term: 'Качественная продукция', description: 'Все наши товары сертифицированы и имеют сопроводительную документацию.', icon: 'certificate'},
+      {term: 'Индивидуальный подход', description: 'Возможность изготовления компонентов специально для васна заводах-изготовителя.', icon: 'box'},
+      {term: 'Бесплатная доставка', description: 'При наличии товара на складе и заказе от 10 000 рублей, доставим бесплатно по Москве и СПБ в течение 2х часов.', icon: 'track'},
+      {term: 'Подбираем аналоги', description: 'Поможем подобрать аналоги популярных европейских брендов в условиях санкций.', icon: 'castling'},
+      {term: 'Резервный запас компонентов', description: 'Хранение товара на наших складах для постоянных клиентов.', icon: 'garage'},
+      {term: 'Гибкая система оплаты', description: 'Отсрочка платежей для постоянных клиентов.', icon: 'hourglass'},
+    ],
+  }
+
+section.section.advantages-section
+  h2.section__title= advantagesSectionContent.title
+  p.advantages-section__description= advantagesSectionContent.description
+  dl.advantages-section__list 
+    each item in advantagesSectionContent.list
+      .advantages-section__item      
+        dt.advantages-section__item-term= item.term
+          span.advantages-section__item-icon
+            +common-sprite(item.icon)(aria-hidden='true')
+        dd.advantages-section__item-description= item.description

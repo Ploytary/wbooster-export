@@ -1,0 +1,8 @@
+-
+  const phoneContent = '+7 (812) <strong>313-58-45</strong>';
+
+mixin phone()
+  p.phone&attributes(attributes)
+    +common-sprite('phone')(class='phone__icon')
+    - const phoneHref = 'tel:' + phoneContent.split('').filter((char) => !isNaN(char - parseFloat(char))).join('');
+    a.phone__link(href=phoneHref)!= phoneContent

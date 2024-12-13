@@ -1,0 +1,31 @@
+-
+  const manufacturersSectionContent = {
+    title: 'Наши производители',
+    description: 'Lorem ipsum dolor sit amet consectetur. Non eget blandit in euismod felis id quisque nunc. Non orci lacus elit mauris velit gravida imperdiet id. Ipsum pulvinar ac ut sociis. Sed magna gravida consequat et euismod aenean quis mauris. Ut etiam egestas ultrices faucibus ultrices nisl enim consequat faucibus. Nibh id leo ullamcorper eleifend. Id at commodo interdum et leo.',
+    list: [
+      {label: 'Eaier', img: '@image/prepared/content/manuf-1.jpg'},
+      {label: 'Foryard', img: '@image/prepared/content/manuf-2.jpg'},
+      {label: 'Fujicon', img: '@image/prepared/content/manuf-3.jpg'},
+      {label: 'JS Artificial Grass', img: '@image/prepared/content/manuf-4.jpg'},
+      {label: 'Marquis', img: '@image/prepared/content/manuf-5.jpg'},
+      {label: 'filler-1', img: '@image/prepared/content/manuf-1.jpg'},
+      {label: 'filler-2', img: '@image/prepared/content/manuf-2.jpg'},
+      {label: 'filler-3', img: '@image/prepared/content/manuf-3.jpg'},
+    ],
+  };
+
+section.section.manufacturers-section(id='manufacturers')
+  h2.section__title.manufacturers-section__title= manufacturersSectionContent.title
+  .manufacturers-section__slider
+    .manufacturers-section__slider-wrapper
+      .swiper.brand-slider
+        ul.swiper-wrapper
+          each slide in manufacturersSectionContent.list
+            li.swiper-slide
+              figure.manufacturers-section__card
+                figcaption.manufacturers-section__card-label.visually-hidden= slide.label
+                +respImage(slide.img, alt='Логотип компании')(class='manufacturers-section__card-image')
+    .brand-slider__controls
+      +brand-slider-button()(prev)
+      +brand-slider-button()(next)
+  p.manufacturers-section__description= manufacturersSectionContent.description

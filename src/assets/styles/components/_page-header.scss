@@ -1,0 +1,138 @@
+@use '../abstracts';
+@use 'sass:map';
+
+.page-header {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 100;
+  padding-block: abstracts.fluid-size(28px, 54px, medium, large);;
+  width: min(100%, 100vw);
+  color: var(--base-color-neutral-100);
+  transition-property: background-color;
+  transition-duration: var(--transition-header);
+
+  &--scrolled {
+    background-color: color-mix(in srgb, var(--brand-color-primary-1) 90%, transparent);
+  }
+
+  &__navigation {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  &__navigation-list {
+    padding-left: 3px;
+    display: none;
+    flex-grow: 1;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+
+    @include abstracts.mq-from(medium) {
+      display: flex;
+    }
+  }
+
+  &__logo {
+    height: 29px;
+    width: 125px;
+    flex-shrink: 0;
+  }
+
+  &__phone {
+    white-space: nowrap;
+  }
+
+  &__burger-menu-button {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    background-color: transparent;
+    cursor: pointer;
+    transition-property: color;
+    transition-duration: var(--transition-hover);
+
+    &:hover {
+       color: color-mix(in srgb, var(--brand-color-secondary-1), white 26%);
+    }
+  }
+
+  @include abstracts.mq-from(medium) {
+    &__logo {
+      height: 29px;
+      width: 155px;
+      flex-shrink: 0;
+    }
+
+    &__navigation {
+      gap: abstracts.fluid-size(28px, 58px, medium, large);
+    }
+
+    &__burger-menu-button {
+      display: none;
+    }
+
+    &__navigation-list {
+      display: flex;
+      gap: 12px abstracts.fluid-size(16px, 39px, medium, large);
+    }
+  }
+}
+
+
+
+.burger-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  background-color: var(--brand-color-primary-1);
+  transform: translateX(calc(100% + 100px));
+  transition-property: transform;
+  transition-duration: var(--transition-burger-menu);
+
+  &__menu {
+    padding: 24px 36px;
+    color: var(--base-color-neutral-100);
+  }
+
+  &__menu-item {
+    padding-block: 10px;
+  }
+
+  &__close-button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 38px;
+    height: 38px;
+    color: var(--base-color-neutral-100);
+    background-color: transparent;
+    transform: translateX(calc(-100% - 15px)) translateY(30px);
+    transition-duration: var(--transition-common);
+    transition-property: color;
+
+    &:hover {
+      color: color-mix(in srgb, var(--brand-color-secondary-1), white 26%);
+    }
+  }
+
+  &--open {
+    transform: translateX(0);
+  }
+
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 200 - 1;
+    backdrop-filter: blur(5px);
+  }
+}

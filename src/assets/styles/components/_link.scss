@@ -1,0 +1,9 @@
+.link {
+  padding-block: 11px;
+  transition-duration: var(--transition-hover);
+  transition-property: color;
+
+  &:hover {
+    color: color-mix(in srgb, var(--brand-color-secondary-1) , white 26%);
+  }
+}

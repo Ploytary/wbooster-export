@@ -1,0 +1,38 @@
+.brand-slider {
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--base-color-neutral-100);
+    background-color: color-mix(in srgb, var(--brand-color-secondary-1) , white 26%);
+    pointer-events: auto;
+    cursor: pointer;
+    transition-duration: var(--transition-hover);
+    transition-property: background-color;
+
+    &:hover {
+      background-color: var(--brand-color-accent-2);
+    }
+
+    &--prev {
+      transform: rotate(90deg);
+    }
+
+    &--next {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &__controls {
+    padding-inline: 15px;
+    pointer-events: none;
+  }
+
+  &__button-icon {
+    width: 13px;
+    height: 13px;
+  }
+}

@@ -1,0 +1,24 @@
+-
+  const stepsSectionContent = {
+    title: 'Схема работы',
+    description: 'Lorem ipsum dolor sit amet consectetur. Augue velit in enim sagittis imperdiet sit mauris. Vitae sit in fusce massa amet.',
+    list: [
+      {title: 'Вы оставляете заявку', description: 'Отправить запрос вы можете любым удобным для вас способом: например, через форму на сайте. Также вы можете связаться с нами напрямую.'},
+      {title: 'Мы проверяем наличие позиций', description: 'Проверяем наличие на складе, а также актуальность производства (возможна замена, если необходимо.) Если требуется замена - подбираем аналоги и привозим на заказ.'},
+      {title: 'Формируем коммерческое предложение', description: 'На данном этапе мы с вами согласуем ценовое предложение, обговариваем сроки поставки и условия оплаты.'},
+      {title: 'Вы получаете товар', description: 'Поставляем вам товар в надлежащей упаковке в сопровождении оригиналов всех необходимых документов либо вы забираете его самовывозом.'},
+      {title: 'Мы выполняем заказ', description: 'Товар поступает на склад в Москву или Санкт-Петербург, где мы сверяем правильность поставки и начинаем сборку.'},
+      {title: 'Проводим оплату', description: 'Далее, после получения авансового платежа, мы размещаем заказ.'},
+    ],
+    actionButton: 'Оставить заявку',
+  };
+
+section.section.steps-section
+  h2.section__title= stepsSectionContent.title
+  p.steps-section__description= stepsSectionContent.description
+  ol.arrow-list.steps-section__steps-list 
+    each step in stepsSectionContent.list
+      li.arrow-list__item 
+        p.arrow-list__item-title= step.title
+        p.arrow-list__item-desc= step.description
+  +main-button(stepsSectionContent.actionButton)(accent, class='steps-section__action-button')

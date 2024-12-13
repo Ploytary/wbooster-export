@@ -1,0 +1,13 @@
+mixin common-sprite(id, className)
+  - const iconClass = className ?? `${id}-icon`;
+  svg.svg-icon&attributes(attributes)(
+    class=iconClass
+  )
+    use(xlink:href=require(`@common-sprite#${id}`))
+
+mixin content-sprite(id, className)
+  - const iconClass = className ?? `${id}-icon`;
+  svg.svg-icon&attributes(attributes)(
+    class=iconClass
+  )
+    use(xlink:href=require(`@content-sprite#${id}`))

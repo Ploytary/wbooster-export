@@ -1,0 +1,25 @@
+.button {
+  cursor: pointer;
+}
+
+.main-button {
+  padding: 19px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  background-color: color-mix(in srgb, var(--brand-color-secondary-1) , white 26%);
+  transition-duration: var(--transition-hover);
+  transition-property: background-color;
+
+  &:hover {
+    background-color: var(--brand-color-accent-2);
+  }
+
+  &--accent {
+    color: var(--base-color-neutral-100);
+    background-color: var(--brand-color-accent-1);
+
+    &:hover {
+      background-color: var(--brand-color-accent-2);
+    }
+  }
+}

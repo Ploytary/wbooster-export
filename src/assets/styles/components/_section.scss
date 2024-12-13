@@ -1,0 +1,10 @@
+.section {
+  padding-top: 142px;
+  padding-bottom: 189px;
+  background-color: color-mix(in srgb, var(--base-color-neutral-0), white 95%);
+
+  &__title {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+}

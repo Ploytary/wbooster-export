@@ -1,0 +1,44 @@
+@use '../abstracts';
+
+.faq-section {
+  z-index: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-image: var(--brand-gradient-4);
+  overflow-x: hidden;
+
+  @include abstracts.page-grid-full-width;
+
+  &__decor-wrapper {
+    position: relative;
+    padding-top: 112px;
+    padding-bottom: 70px;
+    display: grid;
+    grid-template-columns: subgrid;
+
+    @include abstracts.page-grid-breakout;
+
+    & > * {
+      grid-column: content;
+    }
+
+    &::after {
+      z-index: -1;
+      position: absolute;
+      inset: 0;
+      right: 0;
+      content: '';
+      background-image: url('@image/prepared/common/faq-bg.webp');
+      background-position: right center;
+      background-size: auto;
+      background-repeat: no-repeat;
+      mix-blend-mode: soft-light;
+      transform: translateX(20%);
+    }
+  }
+
+  &__title {
+    color: var(--base-color-neutral-100);
+    margin-bottom: 54px;
+  }
+}

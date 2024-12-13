@@ -1,0 +1,22 @@
+.input-field {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+
+  &__label {
+    padding-left: 20px;
+    color: color-mix(in srgb, var(--base-color-neutral-0), white 38%);
+  }
+
+  &__input {
+    padding: 16px 20px;
+    border-radius: 10px;
+    box-shadow: inset 1px 1px 3px color-mix(in srgb, var(--base-color-neutral-0) 10%, transparent);
+    background-color: color-mix(in srgb, var(--brand-color-secondary-1), white 94%);
+    border-style: none;
+
+    &::placeholder {
+      color: color-mix(in srgb, var(--base-color-neutral-0), white 75%);
+    }
+  }
+}

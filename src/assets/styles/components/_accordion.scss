@@ -1,0 +1,110 @@
+$transition-duration: var(--transition-common);
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+
+  &__slot {
+    background-color: var(--base-color-neutral-100);
+    border-radius: 10px;
+    margin-bottom: 25px;
+    transition-duration: var(--transition-common);
+    transition-property: margin-bottom;
+
+    &:has(+ :is(&--open, &--opened)) {
+      margin-bottom: 13px;
+    }
+  }
+
+  :is(&__slot--open, &__slot--opened) {
+    margin-bottom: 15px;
+  }
+
+
+
+  &__summary {
+    padding: 23px 37px 24px 53px;
+    background-image: var(--brand-gradient-5);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  :is(&__slot--open, &__slot--opened) &__summary {
+    background-image: var(--brand-gradient-6);
+  }
+
+  &__details {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows $transition-duration;
+  }
+
+  :is(&__slot--open, &__slot--opened) &__details {
+    grid-template-rows: 1fr;
+  }
+
+  &__details-text {
+    padding: 27px 43px 45px 53px;
+
+    &:not(:last-of-type) {
+      padding: 27px 43px 0 53px;
+    }
+
+    &:first-of-type {
+      padding: 38px 43px 0 53px;
+    }
+
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    transform-origin: center;
+    color: var(--base-color-neutral-100);
+    background-color: var(--brand-color-secondary-1);
+    border-radius: 50%;
+    transition-property: transform;
+    transition-duration: $transition-duration;
+    transform: rotate(0deg);
+
+    & > svg {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 14px;
+      height: 14px;
+      transition-property: opacity;
+      transition-duration: $transition-duration;
+    }
+  }
+
+  
+  :is(&__slot--open, &__slot--opened) &__icon {
+    transform: rotate(-180deg);
+    background-color: var(--base-color-neutral-100);
+    color: var(--brand-color-primary-1)
+  }
+
+  &__details-inner {
+    overflow: hidden;
+  }
+
+  &__trigger {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border-style: none;
+    color: inherit;
+    text-align: inherit;
+    width: 100%;
+    gap: 10px;
+    cursor: pointer;
+  }
+}

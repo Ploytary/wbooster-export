@@ -1,0 +1,22 @@
+@use '../abstracts';
+
+:root {
+  max-width: 3000px;
+  margin-inline: auto;
+  scroll-behavior: smooth;
+}
+
+.section {
+  &:not(:first-of-type) {
+    $mask-size: 60px;
+
+    margin-top: -1 * $mask-size;
+    clip-path: polygon(0% 2px, 100% 2px, 100% 100%, 0 100%);
+    mask-image: linear-gradient(white, white), url('@image/prepared/common/section-mask.png');
+    mask-repeat: no-repeat;
+    mask-position: top center;
+    mask-type: luminance;
+    mask-composite: subtract;
+    mask-size: auto, calc(100% + 2px) $mask-size, calc(100% + 2px) auto;
+  }
+}

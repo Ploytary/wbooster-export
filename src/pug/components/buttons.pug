@@ -1,0 +1,20 @@
+mixin main-button(label)
+  -
+    const {type = 'button', accent, ...restAtt} = attributes
+    const classNames = [
+      accent && 'main-button--accent',
+    ];
+  button.button.main-button(type=type, class=classNames)&attributes(restAtt)= label
+
+mixin brand-slider-button()
+  -
+    const {prev, next, ...restAtts} = attributes;
+    const classNames = [
+      prev && 'brand-slider__button--prev',
+      next && 'brand-slider__button--next',
+    ];
+    const a11yLabel = prev ? 'Предыдущий слайд' : next ? 'Следующий слайд' : null;
+
+  button.brand-slider__button(class = classNames)&attributes(restAtts)
+    +common-sprite('arrow')(class='brand-slider__button-icon')
+    span.brand-slider__button-label.visually-hidden= a11yLabel
