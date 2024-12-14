@@ -15,7 +15,7 @@
 
 form.form.form-callback(action= formContent.request.action, method= formContent.request.method)
   p.form__headline= formContent.description
-  .form__content 
+  fieldset.form__content 
     each input in formContent.fields
       p.form__row
         +input-field(input.label)(name=input.name, placeholder=input.placeholder)

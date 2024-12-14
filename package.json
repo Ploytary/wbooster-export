@@ -51,6 +51,7 @@
     "webpack-dev-server": "^5.0.2"
   },
   "dependencies": {
+    "imask": "^7.6.1",
     "lazysizes": "^5.3.2",
     "swiper": "^11.0.7"
   }

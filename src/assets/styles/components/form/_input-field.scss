@@ -14,6 +14,7 @@
     box-shadow: inset 1px 1px 3px color-mix(in srgb, var(--base-color-neutral-0) 10%, transparent);
     background-color: color-mix(in srgb, var(--brand-color-secondary-1), white 94%);
     border-style: none;
+    color: color-mix(in srgb, var(--base-color-neutral-0), white 38%);
 
     &::placeholder {
       color: color-mix(in srgb, var(--base-color-neutral-0), white 75%);
